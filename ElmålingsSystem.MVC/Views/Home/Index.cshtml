@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Medarbejder"))
+{
+
+    <h2>Velkommen!Du har nu adgang som medarbejder!</h2>
+
+}
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("LejerKunde") || User.IsInRole("EjerKunde"))
+{
+
+<h2>Velkommen! Du kan ændre dine oplysninger under knappen Profil, hvorfra du også kan se dine installationer, måler og statistik</h2>
+    
+
+}
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <h2>Velkommen til Elmålingsystem forside! Venligst log ind for at kunne bruge hjemmesidens funktioner</h2>
+}
+
+

@@ -1,0 +1,118 @@
+﻿@model MyNamespace.InstallationLinked
+
+@{
+    ViewData["Title"] = "InstallationIndex";
+}
+
+<h1>Installation</h1>
+
+<div>
+    <h4>Installation</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ForventetÅrsforbrug)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ForventetÅrsforbrug)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AflæsningsFrekvens)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AflæsningsFrekvens)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Aflæsningsform)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Aflæsningsform)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Afbrydelsesart)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Afbrydelsesart)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tilslutningstype)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tilslutningstype)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EffektgrænseAmpere)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EffektgrænseAmpere)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EffektgrænseKW)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EffektgrænseKW)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.VejNavn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.VejNavn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HusNummer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HusNummer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Etage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Etage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Dør)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Dør)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PostNummer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PostNummer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ByNavn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ByNavn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LandeKode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LandeKode)
+        </dd>        
+    </dl>
+</div>
+<div>
+    <ul>
+        <li>
+            <a asp-controller="Måler" asp-action="MålerIndex" asp-route-InstallationsId="@Model.InstallationsId">Se måler</a>
+        </li>
+     @if (User.IsInRole("Medarbejder"))
+      {
+         <li>
+             <a asp-controller="Måler" asp-action="PostMåler" asp-route-InstallationsId="@Model.InstallationsId">Opret ny måler</a>
+         </li>
+         <li>
+             <a asp-controller="LejerKunde" asp-action="PostLejerKunde" asp-route-InstallationsId="@Model.InstallationsId">Opret ny Lejer</a>
+         </li>
+         <li>
+             <a asp-action="PutInstallation" asp-route-InstallationsId="@Model.InstallationsId">Ændre</a>
+         </li>
+      }
+    
+    </ul>
+</div>

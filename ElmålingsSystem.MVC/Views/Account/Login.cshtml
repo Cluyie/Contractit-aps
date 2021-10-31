@@ -1,0 +1,32 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login in";
+}
+<h1> Login </h1>
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <form id="account" method="post">
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="BrugerLogin"></label>
+                    <input asp-for="BrugerLogin" class="form-control" />
+                    <span asp-validation-for="BrugerLogin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary" name="provider" value="Name" title="Log in">log in</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+<script src="/js/login.js" asp-append-version="true"></script>
+

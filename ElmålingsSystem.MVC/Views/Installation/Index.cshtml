@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MyNamespace.InstallationLinked>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Alle Installationer</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InstallationsId)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ForventetÅrsforbrug)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AflæsningsFrekvens)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Aflæsningsform)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Afbrydelsesart)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Tilslutningstype)
+            </th>                  
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InstallationsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ForventetÅrsforbrug)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AflæsningsFrekvens)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aflæsningsform)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Afbrydelsesart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tilslutningstype)
+            </td>                   
+            <td>
+                
+            <a asp-action="InstallationIndex" asp-route-InstallationsId="@item.InstallationsId">Detaljer</a>
+                  
+        @if (User.IsInRole("Medarbejder"))
+        {
+                        
+                <a asp-action="PutInstallation" asp-route-InstallationsId="@item.InstallationsId">Ændre</a>
+                        
+
+                <a asp-action="DeleteInstallation" asp-route-InstallationsId="@item.InstallationsId">Slet</a>
+                        
+        }
+                
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

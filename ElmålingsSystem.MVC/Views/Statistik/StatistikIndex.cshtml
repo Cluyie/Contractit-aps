@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MyNamespace.MåleVærdierLinked>
+
+@{
+    ViewData["Title"] = "StatistikIndex";
+}
+
+<h1>Statistik over forbrug</h1>
+<center>
+    @using (Html.BeginForm("StatistikIndex", "Statistik", FormMethod.Post))
+    {
+        <span>start dato :</span><input type="date" name="start" />
+        <span>slut dato :</span><input type="date" name="slut" />
+        <input type="submit" value="få statistik" />
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.AflæsningDatoTid)
+                    </th>
+                    <th class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Tællerstand)
+                    </th>
+                    <th class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.ForbrugKWH)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AflæsningDatoTid.DateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tællerstand)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ForbrugKWH)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</center>
+
+

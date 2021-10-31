@@ -1,0 +1,94 @@
+﻿@model MyNamespace.EjerKundeLinked
+
+@{
+    ViewData["Title"] = "EjerkundeIndex";
+}
+
+<h1>Ejerkunde</h1>
+
+<div>
+    <h4>EjerKunde</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CprNr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CprNr)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ForNavn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ForNavn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EfterNavn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EfterNavn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.VejNavn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.VejNavn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HusNummer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HusNummer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Etage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Etage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Dør)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Dør)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PostNummer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PostNummer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ByNavn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ByNavn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KommuneNavn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KommuneNavn)
+        </dd>
+    </dl>
+</div>
+<div>
+    <ul>
+        <li>
+            <a asp-action="PutEjerKunde" asp-route-cprnr="@Model.CprNr">Ændre</a>
+        </li>
+        <li>
+            <a asp-controller="Installation" asp-action="Index" asp-route-cprnr="@Model.CprNr">Se Installationer</a>
+        </li>
+        @if (User.IsInRole("Medarbejder"))
+        {
+    <li>
+        <a asp-controller="Installation" asp-action="PostInstallation" asp-route-cprnr="@Model.CprNr">Ny Installation</a>
+    </li>
+    <li>
+        <a asp-action="Index">Tilbage til alle ejerkunder</a>
+    </li>
+                }
+        </ul>    
+    
+</div>

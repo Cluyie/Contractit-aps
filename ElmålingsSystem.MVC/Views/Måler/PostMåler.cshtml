@@ -1,0 +1,53 @@
+﻿@model MyNamespace.MålerLinked
+
+@{
+    ViewData["Title"] = "PostMåler";
+}
+
+<h1>Opret ny måler</h1>
+
+<h4>Måler</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PostMåler">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MåleromregningsFaktor" class="control-label"></label>
+                <input asp-for="MåleromregningsFaktor" class="form-control" />
+                <span asp-validation-for="MåleromregningsFaktor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MålerCifre" class="control-label"></label>
+                <input asp-for="MålerCifre" class="form-control" />
+                <span asp-validation-for="MålerCifre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Målertype" class="control-label"></label>
+                <input asp-for="Målertype" class="form-control" />
+                <span asp-validation-for="Målertype" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Målingsenhed" class="control-label"></label>
+                <input asp-for="Målingsenhed" class="form-control" />
+                <span asp-validation-for="Målingsenhed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MålerBeskrivelse" class="control-label"></label>
+                <input asp-for="MålerBeskrivelse" class="form-control" />
+                <span asp-validation-for="MålerBeskrivelse" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <input type="submit" value="Opret" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Kunde" asp-action="Index">Tilbage til alle ejerkunder</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

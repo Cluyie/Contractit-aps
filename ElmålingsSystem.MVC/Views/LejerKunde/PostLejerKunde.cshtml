@@ -1,0 +1,78 @@
+﻿@model MyNamespace.LejerKundeLinked
+
+@{
+    ViewData["Title"] = "PostLejerKunde";
+}
+
+<h1>Opret ny lejerkunde</h1>
+
+<h4>LejerKunde</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PostLejerKunde">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CprNr" class="control-label"></label>
+                <input asp-for="CprNr" class="form-control" />
+                <span asp-validation-for="CprNr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ForNavn" class="control-label"></label>
+                <input asp-for="ForNavn" class="form-control" />
+                <span asp-validation-for="ForNavn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EfterNavn" class="control-label"></label>
+                <input asp-for="EfterNavn" class="form-control" />
+                <span asp-validation-for="EfterNavn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VejNavn" class="control-label"></label>
+                <input asp-for="VejNavn" class="form-control" />
+                <span asp-validation-for="VejNavn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HusNummer" class="control-label"></label>
+                <input asp-for="HusNummer" class="form-control" />
+                <span asp-validation-for="HusNummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Etage" class="control-label"></label>
+                <input asp-for="Etage" class="form-control" />
+                <span asp-validation-for="Etage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dør" class="control-label"></label>
+                <input asp-for="Dør" class="form-control" />
+                <span asp-validation-for="Dør" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostNummer" class="control-label"></label>
+                <input asp-for="PostNummer" class="form-control" />
+                <span asp-validation-for="PostNummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ByNavn" class="control-label"></label>
+                <input asp-for="ByNavn" class="form-control" />
+                <span asp-validation-for="ByNavn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KommuneNavn" class="control-label"></label>
+                <input asp-for="KommuneNavn" class="form-control" />
+                <span asp-validation-for="KommuneNavn" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <input type="submit" value="Opret" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Tilbage til alle lejerkunder</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

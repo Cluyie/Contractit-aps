@@ -1,0 +1,98 @@
+﻿@model IEnumerable<MyNamespace.EjerKundeLinked>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+
+
+
+<h1>Alle Ejerkunder</h1>
+
+<a asp-action="PostEjerKunde">Opret ny kunde</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CprNr)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ForNavn)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EfterNavn)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VejNavn)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.HusNummer)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Etage)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Dør)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PostNummer)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ByNavn)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model => model.KommuneNavn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CprNr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForNavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EfterNavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VejNavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HusNummer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Etage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dør)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostNummer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ByNavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KommuneNavn)
+                </td>
+                <td>
+                    <a asp-action="PutEjerKunde" asp-route-cprnr="@item.CprNr">Ændre</a>
+                    <a asp-action="EjerkundeIndex" asp-route-cprnr="@item.CprNr">Detaljer</a>
+                    <a asp-action="DeleteEjerKunde" asp-route-cprnr="@item.CprNr">Slet</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

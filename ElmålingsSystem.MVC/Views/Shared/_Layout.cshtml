@@ -1,0 +1,109 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+
+@inject SignInManager<IdentityUser> SignInManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ElmålingsSystem.MVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/navigation_og_footer.css" />
+    <link rel="stylesheet" href="~/css/forside.css" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+    <header>
+        <div class="main">
+            <div class="navbar">
+                <ul>
+                    <li><a asp-controller="Home" asp-action="Index">Forside</a></li>
+                    @if (!SignInManager.IsSignedIn(User))
+                    {
+                    <li>
+                    <a asp-controller="Account" asp-action="Login">Login</a>
+                    </li>
+
+                    }
+                    <li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+
+                            <form id="logout" asp-controller="Account" asp-action="Logout">
+                                <input type="submit" value="Logout" class="logout" />
+                            </form>
+                        }
+                    </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                    <li>
+
+                            <a asp-controller="Account" asp-action="ChangePassword">Skift password</a>
+                        </li>
+                        }
+                    
+                        @if (User.IsInRole("EjerKunde"))
+                        {
+                            <li>
+                                <a asp-controller="Kunde" asp-action="EjerKundeIndex" asp-route-cprnr="@User.Identity.Name">Profil</a>
+                            </li>
+                        }
+                        else if (User.IsInRole("LejerKunde"))
+                        {
+                        <li>
+                            <a asp-controller="LejerKunde" asp-action="LejerKundeIndex" asp-route-cprnr="@User.Identity.Name">Profil</a>
+                        </li>
+                        }
+                        else if (User.IsInRole("Medarbejder"))
+                        {
+                            <li>
+                                <a asp-controller="LejerKunde" asp-action="Index">Lejerkunde</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Kunde" asp-action="Index">Ejerkunde</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Account" asp-action="Registrere">Registrere ny bruger</a>
+                            </li>
+                        }
+                    
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <footer class="footer">
+        <h2>Contact Us</h2>
+        <div class="footer-items">
+            <div class="left-side">
+                <ul>
+                    <li><i class="fa fa-map-marker" aria-hidden="true"></i>12, Random Street, New York</li>
+                    <li><i class="fa fa-phone" aria-hidden="true"></i>12345678</li>
+                    <li><i class="fa fa-map-envelope" aria-hidden="true"></i>mail@hotmail.com</li>
+                </ul>
+            </div>
+            <div class="social-media">
+                <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Copyright &copy; Contract-it 2019 Anders Lund Jungdal, Christian Sten Jørgensen, Ricardo Dollerup og Steffen Juhl
+        </div>
+    </footer>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,96 @@
+﻿@model MyNamespace.InstallationLinked
+
+@{
+    ViewData["Title"] = "PutInstallation";
+}
+
+<h1>Ændre oplysninger om installationen</h1>
+
+<h4>Installation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PutInstallation">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="InstallationsId" />
+            <div class="form-group">
+                <label asp-for="ForventetÅrsforbrug" class="control-label"></label>
+                <input asp-for="ForventetÅrsforbrug" class="form-control" />
+                <span asp-validation-for="ForventetÅrsforbrug" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AflæsningsFrekvens" class="control-label"></label>
+                <input asp-for="AflæsningsFrekvens" class="form-control" />
+                <span asp-validation-for="AflæsningsFrekvens" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aflæsningsform" class="control-label"></label>
+                <input asp-for="Aflæsningsform" class="form-control" />
+                <span asp-validation-for="Aflæsningsform" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Afbrydelsesart" class="control-label"></label>
+                <input asp-for="Afbrydelsesart" class="form-control" />
+                <span asp-validation-for="Afbrydelsesart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tilslutningstype" class="control-label"></label>
+                <input asp-for="Tilslutningstype" class="form-control" />
+                <span asp-validation-for="Tilslutningstype" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EffektgrænseAmpere" class="control-label"></label>
+                <input asp-for="EffektgrænseAmpere" class="form-control" />
+                <span asp-validation-for="EffektgrænseAmpere" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EffektgrænseKW" class="control-label"></label>
+                <input asp-for="EffektgrænseKW" class="form-control" />
+                <span asp-validation-for="EffektgrænseKW" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VejNavn" class="control-label"></label>
+                <input asp-for="VejNavn" class="form-control" />
+                <span asp-validation-for="VejNavn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HusNummer" class="control-label"></label>
+                <input asp-for="HusNummer" class="form-control" />
+                <span asp-validation-for="HusNummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Etage" class="control-label"></label>
+                <input asp-for="Etage" class="form-control" />
+                <span asp-validation-for="Etage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dør" class="control-label"></label>
+                <input asp-for="Dør" class="form-control" />
+                <span asp-validation-for="Dør" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostNummer" class="control-label"></label>
+                <input asp-for="PostNummer" class="form-control" />
+                <span asp-validation-for="PostNummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ByNavn" class="control-label"></label>
+                <input asp-for="ByNavn" class="form-control" />
+                <span asp-validation-for="ByNavn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandeKode" class="control-label"></label>
+                <input asp-for="LandeKode" class="form-control" />
+                <span asp-validation-for="LandeKode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Opdater" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

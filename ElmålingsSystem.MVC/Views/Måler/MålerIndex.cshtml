@@ -1,0 +1,58 @@
+﻿@model MyNamespace.MålerLinked
+
+@{
+    ViewData["Title"] = "MålerIndex";
+}
+
+<h1>Måler</h1>
+
+<div>
+    <h4>Måler</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MåleromregningsFaktor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MåleromregningsFaktor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MålerCifre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MålerCifre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Målertype)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Målertype)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Målingsenhed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Målingsenhed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MålerBeskrivelse)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MålerBeskrivelse)
+        </dd>        
+    </dl>
+</div>
+<div>
+    <ul>
+        <li>
+            <a asp-controller="Statistik" asp-action="StatistikIndex" asp-route-MålerId="@Model.MålerId">Se Statistik</a>
+        </li>
+        @if (User.IsInRole("Medarbejder"))
+        {
+            <li>
+                <a asp-action="DeleteMåler" asp-route-MålerId="@Model.MålerId">Slet</a>
+            </li>
+        }
+    </ul>
+    
+</div>

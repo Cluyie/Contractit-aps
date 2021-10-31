@@ -1,0 +1,51 @@
+﻿@model MyNamespace.MålerLinked
+
+@{
+    ViewData["Title"] = "DeleteMåler";
+}
+
+<h1>Slet måler</h1>
+
+<h3>Er du sikker på du vil slette denne måler?</h3>
+<div>
+    <h4>Måler</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MåleromregningsFaktor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MåleromregningsFaktor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MålerCifre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MålerCifre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Målertype)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Målertype)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Målingsenhed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Målingsenhed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MålerBeskrivelse)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MålerBeskrivelse)
+        </dd>        
+    </dl>
+    
+    <form asp-action="DeleteMåler">
+        <input type="hidden" asp-for="MålerId" />
+        <input type="submit" value="Slet" class="btn btn-danger" /> |
+        <a asp-controller="Kunde" asp-action="Index">Tilbage til alle ejerkunder</a>
+    </form>
+</div>
