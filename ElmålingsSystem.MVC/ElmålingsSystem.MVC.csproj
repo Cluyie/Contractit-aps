@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ElmålingsSystem.DAL\ElmålingsSystem.DAL.csproj" />
-    <ProjectReference Include="..\ElmålingsSystem.MVC.APIService.Client\ElmålingsSystem.MVC.APIService.Client.csproj" />
   </ItemGroup>
 
 </Project>
