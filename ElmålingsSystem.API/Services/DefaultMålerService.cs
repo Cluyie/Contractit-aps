@@ -21,7 +21,7 @@ namespace ElmålingsSystem.API.Services
             _mappingConfiguration = mappingConfiguration;
         }
 
-        public async Task<MålerLinked> GetMålerByInstallationsId(int installationsId)
+        public async Task<MålerDTO> GetMålerByInstallationsId(int installationsId)
         {
             //search in Måler(db), if there's a 'Måler' with a MålerId, equal to målerId
             var måler = await _context.Måler.SingleOrDefaultAsync(m => m.Installation.InstallationsId == installationsId);
@@ -31,10 +31,10 @@ namespace ElmålingsSystem.API.Services
             //returns a mapped MålerVM, with attributes from Måler
             var mapper = _mappingConfiguration.CreateMapper();
 
-            return mapper.Map<MålerLinked>(måler);
+            return mapper.Map<MålerDTO>(måler);
         }
 
-        public async Task<MålerLinked> PostMåler(int installationsId, [FromBody] MålerLinked måler)
+        public async Task<MålerDTO> PostMåler(int installationsId, [FromBody] MålerDTO måler)
         {
             var installation = await _context.Installationer.FirstOrDefaultAsync(i => i.InstallationsId == installationsId);
             if (installation == null) return null;
@@ -52,7 +52,7 @@ namespace ElmålingsSystem.API.Services
             return mappedMåler;
         }
 
-        public async Task<MålerLinked> PutMålerById(int målerId, [FromBody] MålerLinked måler)
+        public async Task<MålerDTO> PutMålerById(int målerId, [FromBody] MålerDTO måler)
         {
             var installation = await _context.Installationer.SingleOrDefaultAsync(k => k.Måler.MålerId.Equals(målerId));
             if (installation == null) return null;

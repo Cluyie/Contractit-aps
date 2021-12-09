@@ -2,7 +2,7 @@
 
 namespace ElmålingsSystem.API.Models
 {
-    public class LejerKundeLinked : Resource, IKunde
+    public class LejerKundeDTO : Resource, IKunde
     {
         public int KundeId { get; set; }
         public int CPRNr { get; set; }

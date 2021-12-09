@@ -22,7 +22,7 @@ namespace ElmålingsSystem.API.Services
             _mappingConfiguration = mappingConfiguration;
         }
 
-        public async Task<InstallationLinked> GetInstallationById(int installationsId)
+        public async Task<InstallationDTO> GetInstallationById(int installationsId)
         {
             //search in Installation(db), if there's a 'installation' with an InstallationsId, equal to installationsId
             var installation = await _context.Installationer.SingleOrDefaultAsync(m => m.InstallationsId == installationsId);
@@ -32,16 +32,16 @@ namespace ElmålingsSystem.API.Services
             //returns a mapped InstallationVM, with attributes from Installation
             var mapper = _mappingConfiguration.CreateMapper();
 
-            return  mapper.Map<InstallationLinked>(installation);
+            return  mapper.Map<InstallationDTO>(installation);
         }
 
-        public async Task<IEnumerable<InstallationLinked>> GetAllInstallationerFromKundeCprNr(int kundeCprNr)
+        public async Task<IEnumerable<InstallationDTO>> GetAllInstallationerFromKundeCprNr(int kundeCprNr)
         {
-            var installationer = _context.Installationer.Where(i => i.EjerKunde.CprNr.Equals(kundeCprNr)).ProjectTo<InstallationLinked>(_mappingConfiguration);
+            var installationer = _context.Installationer.Where(i => i.EjerKunde.CprNr.Equals(kundeCprNr)).ProjectTo<InstallationDTO>(_mappingConfiguration);
 
             if (!installationer.Any())
             {
-                installationer = _context.Installationer.Where(i => i.LejerKunde.CprNr.Equals(kundeCprNr)).ProjectTo<InstallationLinked>(_mappingConfiguration);
+                installationer = _context.Installationer.Where(i => i.LejerKunde.CprNr.Equals(kundeCprNr)).ProjectTo<InstallationDTO>(_mappingConfiguration);
             }
 
             if (!installationer.Any()) return null;
@@ -49,7 +49,7 @@ namespace ElmålingsSystem.API.Services
             return await installationer.ToArrayAsync();
         }
 
-        public async Task<InstallationLinked> PostInstallation(int ejerKundeCprNr, [FromBody] InstallationLinked installation)
+        public async Task<InstallationDTO> PostInstallation(int ejerKundeCprNr, [FromBody] InstallationDTO installation)
         {
             var ejerKunde = await _context.EjerKunder.FirstOrDefaultAsync(e => e.CprNr == ejerKundeCprNr);
             if (ejerKunde == null) return null;
@@ -67,7 +67,7 @@ namespace ElmålingsSystem.API.Services
             return mappedInstallation;
         }
 
-        public async Task<InstallationLinked> PutInstallationById(int installationsId, [FromBody]InstallationLinked installation)
+        public async Task<InstallationDTO> PutInstallationById(int installationsId, [FromBody]InstallationDTO installation)
         {
             //var kunde = await _context.EjerKunder.SingleOrDefaultAsync(k => k.CprNr == ejerKundeCprNr);
             var kunde = await _context.EjerKunder.FirstOrDefaultAsync(k => k.Installationer.FirstOrDefault(i => i.InstallationsId == installationsId).InstallationsId.Equals(installationsId));

@@ -17,7 +17,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpGet("{installationsId}",Name = nameof(GetMålerByInstallationsId))]
-        public async Task<ActionResult<MålerLinked>> GetMålerByInstallationsId(int installationsId)
+        public async Task<ActionResult<MålerDTO>> GetMålerByInstallationsId(int installationsId)
         {
             var måler = await _service.GetMålerByInstallationsId(installationsId);
 
@@ -27,7 +27,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpPost(Name = nameof(PostMåler))]
-        public async Task<ActionResult<MålerLinked>> PostMåler(int installationsId, [FromBody] MålerLinked måler)
+        public async Task<ActionResult<MålerDTO>> PostMåler(int installationsId, [FromBody] MålerDTO måler)
         {
             var nyMåler = await _service.PostMåler(installationsId, måler);
 
@@ -37,7 +37,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpPut("{målerId}", Name = nameof(PutMålerById))]
-        public async Task<ActionResult<MålerLinked>> PutMålerById(int målerId, [FromBody] MålerLinked måler)
+        public async Task<ActionResult<MålerDTO>> PutMålerById(int målerId, [FromBody] MålerDTO måler)
         {
             var editedMåler = await _service.PutMålerById(målerId, måler);
 
@@ -47,7 +47,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpDelete("{målerId}", Name = nameof(DeleteMålerById))]
-        public async Task<ActionResult<MålerLinked>> DeleteMålerById(int målerId)
+        public async Task<ActionResult<MålerDTO>> DeleteMålerById(int målerId)
         {
             var måler = await _service.DeleteMålerById(målerId);
 

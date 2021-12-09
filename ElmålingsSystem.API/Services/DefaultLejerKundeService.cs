@@ -22,7 +22,7 @@ namespace ElmålingsSystem.API.Services
             _mappingConfiguration = mappingConfiguration;
         }
 
-        public async Task<LejerKundeLinked> GetLejerKundeByCpr(int lejerKundeCprNr)
+        public async Task<LejerKundeDTO> GetLejerKundeByCpr(int lejerKundeCprNr)
         {
             //search in LejerKunder(db), if there's a 'Lejerkunde' with a KundeId, equal to lejerKundeId
             var lejerkunde = await _context.LejerKunder.SingleOrDefaultAsync(m => m.CprNr == lejerKundeCprNr);
@@ -31,18 +31,18 @@ namespace ElmålingsSystem.API.Services
 
             //returns a mapped LejerKundeVM, with attributes from LejerKunde
             var mapper = _mappingConfiguration.CreateMapper();
-            return mapper.Map<LejerKundeLinked>(lejerkunde);
+            return mapper.Map<LejerKundeDTO>(lejerkunde);
         }
 
-        public async Task<IEnumerable<LejerKundeLinked>> GetAllLejerKunder()
+        public async Task<IEnumerable<LejerKundeDTO>> GetAllLejerKunder()
         {
-            var lejerKunder = _context.LejerKunder.ProjectTo<LejerKundeLinked>(_mappingConfiguration);
+            var lejerKunder = _context.LejerKunder.ProjectTo<LejerKundeDTO>(_mappingConfiguration);
 
             //return _ignore.GetAllModelsWtihIgnoredNullValues(ejerKunder);
             return await lejerKunder.ToArrayAsync();
         }
 
-        public async Task<LejerKundeLinked> PostLejerKunde(int installationsId, [FromBody] LejerKundeLinked lejerKunde)
+        public async Task<LejerKundeDTO> PostLejerKunde(int installationsId, [FromBody] LejerKundeDTO lejerKunde)
         {
             var installation = await _context.Installationer.FirstOrDefaultAsync(i => i.InstallationsId == installationsId);
             if (installation == null) return null;
@@ -60,7 +60,7 @@ namespace ElmålingsSystem.API.Services
             return mappedLejerKunde;
         }
 
-        public async Task<LejerKundeLinked> PutLejerKundeById(int lejerKundeId, [FromBody]LejerKundeLinked lejerKunde)
+        public async Task<LejerKundeDTO> PutLejerKundeById(int lejerKundeId, [FromBody]LejerKundeDTO lejerKunde)
         {
             //var installation = await _context.Installationer.SingleOrDefaultAsync(k => k.InstallationsId == installationsId);
             var installation = await _context.Installationer.FirstOrDefaultAsync(k => k.LejerKunde.KundeId.Equals(lejerKundeId));

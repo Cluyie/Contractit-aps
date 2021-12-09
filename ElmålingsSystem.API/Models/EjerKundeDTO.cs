@@ -1,7 +1,10 @@
-﻿namespace ElmålingsSystem.API.Models
+﻿using ElmålingsSystem.API.Infrastructure;
+
+namespace ElmålingsSystem.API.Models
 {
-    public class EjerKundeVM : IKunde
+    public class EjerKundeDTO
     {
+        public int KundeId { get; set; }
         public int CPRNr { get; set; }
         public string ForNavn { get; set; }
         public string EfterNavn { get; set; }
@@ -13,5 +16,4 @@
         public string ByNavn { get; set; }
         public string KommuneNavn { get; set; }
     }
-
 }

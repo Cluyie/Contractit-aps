@@ -10,10 +10,10 @@ namespace ElmålingsSystem.API.Services
 {
     public interface IInstallationService
     {
-        Task<InstallationLinked> GetInstallationById(int installationsId);
-        Task<IEnumerable<InstallationLinked>> GetAllInstallationerFromKundeCprNr(int ejerKundeCprNr);
-        Task<InstallationLinked> PostInstallation(int ejerKundeCprNr, [FromBody] InstallationLinked installation);
-        Task<InstallationLinked> PutInstallationById(int installationsId, [FromBody] InstallationLinked installation);
+        Task<InstallationDTO> GetInstallationById(int installationsId);
+        Task<IEnumerable<InstallationDTO>> GetAllInstallationerFromKundeCprNr(int ejerKundeCprNr);
+        Task<InstallationDTO> PostInstallation(int ejerKundeCprNr, [FromBody] InstallationDTO installation);
+        Task<InstallationDTO> PutInstallationById(int installationsId, [FromBody] InstallationDTO installation);
         Task<bool> DeleteInstallationById(int installationsId);
     }
 }

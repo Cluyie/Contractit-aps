@@ -20,7 +20,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpGet("{installationsId}", Name = nameof(GetInstallation))]
-        public async Task<ActionResult<InstallationLinked>> GetInstallation(int installationsId)
+        public async Task<ActionResult<InstallationDTO>> GetInstallation(int installationsId)
         {
             var installation = await _service.GetInstallationById(installationsId);
 
@@ -30,13 +30,13 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpGet("All/{ejerKundeCprNr}", Name = nameof(GetAllInstallationer))]
-        public async Task<ActionResult<IEnumerable<InstallationLinked>>> GetAllInstallationer(int ejerKundeCprNr)
+        public async Task<ActionResult<IEnumerable<InstallationDTO>>> GetAllInstallationer(int ejerKundeCprNr)
         {
             var installationer = await _service.GetAllInstallationerFromKundeCprNr(ejerKundeCprNr);
 
             if (installationer == null) return NotFound();
 
-            var collection = new Collection<InstallationLinked>
+            var collection = new Collection<InstallationDTO>
             {
                 Self = Link.ToCollection(nameof(GetAllInstallationer)),
                 Value = installationer.ToArray()
@@ -46,7 +46,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpPost(Name = nameof(PostInstallation))]
-        public async Task<ActionResult<InstallationLinked>> PostInstallation(int ejerKundeCprNr, [FromBody] InstallationLinked installation)
+        public async Task<ActionResult<InstallationDTO>> PostInstallation(int ejerKundeCprNr, [FromBody] InstallationDTO installation)
         {
             var nyInstallation = await _service.PostInstallation(ejerKundeCprNr, installation);
 
@@ -56,7 +56,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpPut("{installationsId}",Name = nameof(PutInstallation))]
-        public async Task<ActionResult<InstallationLinked>> PutInstallation(int installationsId, [FromBody]InstallationLinked installation)
+        public async Task<ActionResult<InstallationDTO>> PutInstallation(int installationsId, [FromBody]InstallationDTO installation)
         {
             var editedInstallation = await _service.PutInstallationById(installationsId, installation);
 
@@ -66,7 +66,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpDelete("{installationsId}",Name = nameof(DeleteInstallation))]
-        public async Task<ActionResult<InstallationLinked>> DeleteInstallation(int installationsId)
+        public async Task<ActionResult<InstallationDTO>> DeleteInstallation(int installationsId)
         {
             var installation = await _service.DeleteInstallationById(installationsId);
 

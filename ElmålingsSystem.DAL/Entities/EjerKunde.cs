@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ElmålingsSystem.DAL.Models
+namespace ElmålingsSystem.DAL.Entities
 {
-    public class LejerKunde : IKunde
+    public class EjerKunde
     {
         [Key]
-        public int KundeId { get; set; }
+        public int Id { get; set; }
         public int CprNr { get; set; }
         public string ForNavn { get; set; }
         public string EfterNavn { get; set; }
@@ -20,8 +21,8 @@ namespace ElmålingsSystem.DAL.Models
         public string ByNavn { get; set; }
         public string KommuneNavn { get; set; }
 
-        //Foreign key
-        public int InstallionFK { get; set; }
-        public Installation Installation { get; set; }
+        // outgoing relations / one-to-many
+        public virtual ICollection<Installation> Installationer { get; set; }
+        public virtual ICollection<LejerKunde> LejerKunder { get; set; }
     }
 }

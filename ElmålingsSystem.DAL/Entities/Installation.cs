@@ -1,11 +1,15 @@
-﻿using ElmålingsSystem.API.Infrastructure;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ElmålingsSystem.API.Models
+namespace ElmålingsSystem.DAL.Entities
 {
-    public class InstallationLinked : Resource, IInstallation
+    public class Installation
     {
-       
-        public int InstallationsId { get; set; }
+        [Key]
+        public int Id { get; set; }
         public double ForventetÅrsforbrug { get; set; }
         public string AflæsningsFrekvens { get; set; }
         public string Aflæsningsform { get; set; }
@@ -20,5 +24,12 @@ namespace ElmålingsSystem.API.Models
         public int PostNummer { get; set; }
         public string ByNavn { get; set; }
         public string LandeKode { get; set; }
+
+        // outgoing relations
+        public Måler Måler { get; set; }
+        // foreign keys
+        [ForeignKey("EjerKunde")]
+        public int EjerKundeId { get; set; }
+        public EjerKunde EjerKunde { get; set; }
     }
 }

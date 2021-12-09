@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace ElmålingsSystem.DAL.Models
+namespace ElmålingsSystem.DAL.Entities
 {
-    public class Måleværdier : IMåleværdier
+    public class Måleværdier
     {
         [Key]
-        public int MåleraflæsningId { get; set; }
+        public int Id { get; set; }
         public DateTime AflæsningDatoTid { get; set; }
         public double Tællerstand { get; set; }
         public int ForbrugKWH { get; set; }

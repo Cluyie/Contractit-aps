@@ -21,14 +21,14 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpGet("{målerId}", Name = nameof(GetAllMåleVærdierFromMålerIdAndDate))]
-        public async Task<ActionResult<IEnumerable<MåleVærdierLinked>>> GetAllMåleVærdierFromMålerIdAndDate(int målerId, DateTime start, DateTime end)
+        public async Task<ActionResult<IEnumerable<MåleVærdierDTO>>> GetAllMåleVærdierFromMålerIdAndDate(int målerId, DateTime start, DateTime end)
         {
            
             var måleVærdier = await _service.GetAllMåleVærdierFromMålerIdAndDate(målerId, start, end);
 
             if (måleVærdier == null) return NotFound();
 
-            var collection = new Collection<MåleVærdierLinked>
+            var collection = new Collection<MåleVærdierDTO>
             {
                 Self = Link.ToCollection(nameof(GetAllMåleVærdierFromMålerIdAndDate)),
                 Value = måleVærdier.ToArray()

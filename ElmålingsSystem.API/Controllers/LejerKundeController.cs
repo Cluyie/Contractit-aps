@@ -20,7 +20,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpGet("{lejerKundeCprNr}", Name = nameof(GetLejerKundeById))]
-        public async Task<ActionResult<LejerKundeLinked>> GetLejerKundeById(int lejerKundeCprNr)
+        public async Task<ActionResult<LejerKundeDTO>> GetLejerKundeById(int lejerKundeCprNr)
         {
             var lejerKunde = await _service.GetLejerKundeByCpr(lejerKundeCprNr);
 
@@ -30,11 +30,11 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpGet(Name = nameof(GetAllLejerKunder))]
-        public async Task<ActionResult<IEnumerable<LejerKundeLinked>>> GetAllLejerKunder()
+        public async Task<ActionResult<IEnumerable<LejerKundeDTO>>> GetAllLejerKunder()
         {
             var lejerKunder = await _service.GetAllLejerKunder();
 
-            var collection = new Collection<LejerKundeLinked>
+            var collection = new Collection<LejerKundeDTO>
             {
                 Self = Link.ToCollection(nameof(GetAllLejerKunder)),
                 Value = lejerKunder.ToArray()
@@ -44,7 +44,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpPost(Name = nameof(PostLejerKunde))]
-        public async Task<ActionResult<LejerKundeLinked>> PostLejerKunde(int installationsId, [FromBody] LejerKundeLinked lejerKunde)
+        public async Task<ActionResult<LejerKundeDTO>> PostLejerKunde(int installationsId, [FromBody] LejerKundeDTO lejerKunde)
         {
             var nyLejerKunde = await _service.PostLejerKunde(installationsId, lejerKunde);
 
@@ -54,7 +54,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpPut("{lejerKundeId}",Name = nameof(PutLejerKundeById))]
-        public async Task<ActionResult<LejerKundeLinked>> PutLejerKundeById(int lejerKundeId, LejerKundeLinked lejerKunde)
+        public async Task<ActionResult<LejerKundeDTO>> PutLejerKundeById(int lejerKundeId, LejerKundeDTO lejerKunde)
         {
             var editedLejerKunde = await _service.PutLejerKundeById(lejerKundeId, lejerKunde);
 
@@ -64,7 +64,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpDelete("{lejerKundeCprNr}",Name = nameof(DeleteLejerKundeById))]
-        public async Task<ActionResult<LejerKundeLinked>> DeleteLejerKundeById(int lejerKundeCprNr)
+        public async Task<ActionResult<LejerKundeDTO>> DeleteLejerKundeById(int lejerKundeCprNr)
         {
             var lejerKunde = await _service.DeleteLejerKundeByCpr(lejerKundeCprNr);
 

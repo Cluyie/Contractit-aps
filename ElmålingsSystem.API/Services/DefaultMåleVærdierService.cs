@@ -21,13 +21,13 @@ namespace ElmålingsSystem.API.Services
             _mappingConfiguration = mappingConfiguration;
         }
 
-        public async Task<IEnumerable<MåleVærdierLinked>> GetAllMåleVærdierFromMålerIdAndDate(int målerId, DateTime start, DateTime end)
+        public async Task<IEnumerable<MåleVærdierDTO>> GetAllMåleVærdierFromMålerIdAndDate(int målerId, DateTime start, DateTime end)
         {
             
             var måleVærdier = _context.Måleværdier
                 .Where((m => m.Måler.MålerId.Equals(målerId) &&
                 m.AflæsningDatoTid >= start &&
-                m.AflæsningDatoTid < end)).ProjectTo<MåleVærdierLinked>(_mappingConfiguration);
+                m.AflæsningDatoTid < end)).ProjectTo<MåleVærdierDTO>(_mappingConfiguration);
 
             if (måleVærdier == null) return null;
 

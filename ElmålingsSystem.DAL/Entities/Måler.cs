@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace ElmålingsSystem.DAL.Models
+namespace ElmålingsSystem.DAL.Entities
 {
-    public class Måler : IMåler
+    public class Måler
     {
         [Key]
-        public int MålerId { get; set; }
+        public int Id { get; set; }
         public double MåleromregningsFaktor { get; set; }
         public string MålerCifre { get; set; }
         public string Målertype { get; set; }

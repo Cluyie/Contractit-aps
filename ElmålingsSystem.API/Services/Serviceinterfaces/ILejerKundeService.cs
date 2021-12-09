@@ -10,10 +10,10 @@ namespace ElmålingsSystem.API.Services
 {
     public interface ILejerKundeService
     {
-        Task<LejerKundeLinked> GetLejerKundeByCpr(int lejerKundeCprNr);
-        Task<IEnumerable<LejerKundeLinked>> GetAllLejerKunder();
-        Task<LejerKundeLinked> PostLejerKunde(int installationsId, [FromBody]LejerKundeLinked lejerKunde);
-        Task<LejerKundeLinked> PutLejerKundeById(int lejerKundeId, LejerKundeLinked lejerKunde);
+        Task<LejerKundeDTO> GetLejerKundeByCpr(int lejerKundeCprNr);
+        Task<IEnumerable<LejerKundeDTO>> GetAllLejerKunder();
+        Task<LejerKundeDTO> PostLejerKunde(int installationsId, [FromBody]LejerKundeDTO lejerKunde);
+        Task<LejerKundeDTO> PutLejerKundeById(int lejerKundeId, LejerKundeDTO lejerKunde);
         Task<bool> DeleteLejerKundeByCpr(int lejerKundeCprNr);
     }
 }

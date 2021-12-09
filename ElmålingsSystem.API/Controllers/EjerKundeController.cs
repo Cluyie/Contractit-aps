@@ -3,6 +3,7 @@ using ElmålingsSystem.API.Models;
 using ElmålingsSystem.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace ElmålingsSystem.API.Controllers
         [HttpGet("/{ejerKundeCprNr}", Name = nameof(GetEjerKunde))]
         [ProducesResponseType(404)]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<EjerKundeLinked>> GetEjerKunde(int ejerKundeCprNr)
+        public async Task<ActionResult<EjerKundeDTO>> GetEjerKunde(int ejerKundeCprNr)
         {
             var ejerKunde = await _service.GetEjerKundeByCpr(ejerKundeCprNr);
 
@@ -34,21 +35,14 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpGet(Name = nameof(GetAllEjerKunder))]
-        public async Task<ActionResult<IEnumerable<EjerKundeLinked>>> GetAllEjerKunder()
+        public async Task<ActionResult<IEnumerable<EjerKundeDTO>>> GetAllEjerKunder()
         {
             var ejerKunder = await _service.GetAllEjerKunder();
-
-            var collection = new Collection<EjerKundeLinked>
-            {
-                Self = Link.ToCollection(nameof(GetAllEjerKunder)),
-                Value = ejerKunder.ToArray()
-            };
-
             return Ok(ejerKunder);
         }
 
         [HttpPost(Name = nameof(PostEjerKunde))]
-        public async Task<ActionResult<EjerKundeLinked>> PostEjerKunde([FromBody] EjerKundeLinked ejerKunde)
+        public async Task<ActionResult<EjerKundeDTO>> PostEjerKunde([FromBody] EjerKundeDTO ejerKunde)
         {
             var nyEjer = await _service.PostEjerKunde(ejerKunde);
 
@@ -58,7 +52,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpPut("{ejerKundeId}",Name = nameof(PutEjerKunde))]
-        public async Task<ActionResult<EjerKundeLinked>> PutEjerKunde(int ejerKundeId, [FromBody]EjerKundeLinked ejerkunde)
+        public async Task<ActionResult<EjerKundeDTO>> PutEjerKunde(int ejerKundeId, [FromBody]EjerKundeDTO ejerkunde)
         {
             var editedEjerKunde = await _service.PutEjerKundeById(ejerKundeId, ejerkunde);
 
@@ -68,7 +62,7 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         [HttpDelete("{ejerKundeCprNr}",Name = nameof(DeleteEjerKunde))]
-        public async Task<ActionResult<EjerKundeLinked>> DeleteEjerKunde(int ejerKundeCprNr)
+        public async Task<ActionResult<EjerKundeDTO>> DeleteEjerKunde(int ejerKundeCprNr)
         {
             var ejer = await _service.DeleteEjerKundeByCpr(ejerKundeCprNr);
 

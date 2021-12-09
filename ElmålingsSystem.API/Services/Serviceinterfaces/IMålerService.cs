@@ -7,9 +7,9 @@ namespace ElmålingsSystem.API.Services
 {
     public interface IMålerService
     {
-        Task<MålerLinked> GetMålerByInstallationsId(int installationsId);
-        Task<MålerLinked> PostMåler(int installationsId, [FromBody] MålerLinked måler);
-        Task<MålerLinked> PutMålerById(int målerId, [FromBody] MålerLinked måler);
+        Task<MålerDTO> GetMålerByInstallationsId(int installationsId);
+        Task<MålerDTO> PostMåler(int installationsId, [FromBody] MålerDTO måler);
+        Task<MålerDTO> PutMålerById(int målerId, [FromBody] MålerDTO måler);
         Task<bool> DeleteMålerById(int målerId);
     }
 }

@@ -20,7 +20,7 @@ namespace ElmålingsSystem.API.Services
             _mappingConfiguration = mappingConfiguration;
         }
 
-        public async Task<EjerKundeLinked> GetEjerKundeByCpr(int ejerKundeCprNr)
+        public async Task<EjerKundeDTO> GetEjerKundeByCpr(int ejerKundeCprNr)
         {
             //search in EjerKunder(db), if there's a 'Ejerkunde' with a CprNr, equal to ejerKundeCprNr
             var ejerKunde = await _context.EjerKunder.SingleOrDefaultAsync(e => e.CprNr == ejerKundeCprNr);
@@ -30,19 +30,19 @@ namespace ElmålingsSystem.API.Services
             //returns a mapped EjerKundeVM, with attributes from ejerKunde
             //var mappedEjerKunde = _mapper.Map<EjerKundeVM>(ejerKunde);
             var mapper = _mappingConfiguration.CreateMapper();
-            return mapper.Map<EjerKundeLinked>(ejerKunde);
+            return mapper.Map<EjerKundeDTO>(ejerKunde);
         }
 
-        public async Task<IEnumerable<EjerKundeLinked>> GetAllEjerKunder()
+        public async Task<IEnumerable<EjerKundeDTO>> GetAllEjerKunder()
         {
-            var ejerKunder = _context.EjerKunder.ProjectTo<EjerKundeLinked>(_mappingConfiguration);
+            var ejerKunder = _context.EjerKunder.ProjectTo<EjerKundeDTO>(_mappingConfiguration);
 
             //return _ignore.GetAllModelsWtihIgnoredNullValues(ejerKunder);
             return await ejerKunder.ToArrayAsync();
         }
 
 
-        public async Task<EjerKundeLinked> PostEjerKunde([FromBody] EjerKundeLinked ejerKunde)
+        public async Task<EjerKundeDTO> PostEjerKunde([FromBody] EjerKundeDTO ejerKunde)
         {
             //maps an 'EjerKunde' with values from EjerkundeVM
             var mapper = _mappingConfiguration.CreateMapper();
@@ -57,7 +57,7 @@ namespace ElmålingsSystem.API.Services
             return mappedEjerKunde;
         }
 
-        public async Task<EjerKundeLinked> PutEjerKundeById(int ejerKundeId, [FromBody]EjerKundeLinked ejerkunde)
+        public async Task<EjerKundeDTO> PutEjerKundeById(int ejerKundeId, [FromBody]EjerKundeDTO ejerkunde)
         {
             //maps an 'EjerKunde' with values from EjerkundeVM
             var mapper = _mappingConfiguration.CreateMapper();
