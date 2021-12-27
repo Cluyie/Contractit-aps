@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using ElmålingsSystem.API.Models;
-using ElmålingsSystem.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElmålingsSystem.API.Services

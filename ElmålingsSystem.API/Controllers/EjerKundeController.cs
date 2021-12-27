@@ -21,12 +21,12 @@ namespace ElmålingsSystem.API.Controllers
         }
 
         // GET /api/EjerKunde/{ejerKundeCprNr}
-        [HttpGet("/{ejerKundeCprNr}", Name = nameof(GetEjerKunde))]
+        [HttpGet("/{id}", Name = nameof(GetEjerKunde))]
         [ProducesResponseType(404)]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<EjerKundeDTO>> GetEjerKunde(int ejerKundeCprNr)
+        public async Task<ActionResult<EjerKundeDTO>> GetEjerKunde(int id)
         {
-            var ejerKunde = await _service.GetEjerKundeByCpr(ejerKundeCprNr);
+            var ejerKunde = await _service.GetEjerKunde(id);
 
             if (ejerKunde == null) return NotFound();
 
@@ -51,20 +51,20 @@ namespace ElmålingsSystem.API.Controllers
             return Ok(nyEjer);
         }
 
-        [HttpPut("{ejerKundeId}",Name = nameof(PutEjerKunde))]
-        public async Task<ActionResult<EjerKundeDTO>> PutEjerKunde(int ejerKundeId, [FromBody]EjerKundeDTO ejerkunde)
+        [HttpPut("{id}",Name = nameof(PutEjerKunde))]
+        public async Task<ActionResult<EjerKundeDTO>> PutEjerKunde(int id, [FromBody]EjerKundeDTO ejerkunde)
         {
-            var editedEjerKunde = await _service.PutEjerKundeById(ejerKundeId, ejerkunde);
+            var editedEjerKunde = await _service.PutEjerKunde(id, ejerkunde);
 
             if (editedEjerKunde == null) return NotFound();
 
             return Ok(editedEjerKunde);
         }
 
-        [HttpDelete("{ejerKundeCprNr}",Name = nameof(DeleteEjerKunde))]
-        public async Task<ActionResult<EjerKundeDTO>> DeleteEjerKunde(int ejerKundeCprNr)
+        [HttpDelete("{id}",Name = nameof(DeleteEjerKunde))]
+        public async Task<IActionResult> DeleteEjerKunde(int id)
         {
-            var ejer = await _service.DeleteEjerKundeByCpr(ejerKundeCprNr);
+            var ejer = await _service.DeleteEjerKunde(id);
 
             if (ejer == false) return NotFound();
 

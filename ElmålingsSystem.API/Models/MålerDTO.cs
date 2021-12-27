@@ -2,9 +2,9 @@
 
 namespace ElmålingsSystem.API.Models
 {
-    public class MålerDTO : Resource, IMåler
+    public class MålerDTO
     {
-        public int MålerId { get; set; }
+        public int Id { get; set; }
         public double MåleromregningsFaktor { get; set; }
         public string MålerCifre { get; set; }
         public string Målertype { get; set; }

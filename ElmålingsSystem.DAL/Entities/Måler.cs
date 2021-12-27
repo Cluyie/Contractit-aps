@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ElmålingsSystem.DAL.Entities
 {
@@ -19,7 +20,8 @@ namespace ElmålingsSystem.DAL.Entities
         public ICollection<Måleværdier> Måleværdier { get; set; }
 
         //Foreign key
-        public int InstallionFK { get; set; }
+        [ForeignKey("Installation")]
+        public int InstallationId { get; set; }
         public Installation Installation { get; set; }
     }
 }

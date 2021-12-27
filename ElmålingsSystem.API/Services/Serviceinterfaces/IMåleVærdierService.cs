@@ -8,6 +8,6 @@ namespace ElmålingsSystem.API.Services
 {
     public interface IMåleVærdierService
     {
-        Task<IEnumerable<MåleVærdierDTO>> GetAllMåleVærdierFromMålerIdAndDate(int målerId, DateTime start, DateTime end);
+        Task<IEnumerable<MåleVærdierDTO>> GetAllMåleVærdier(int målerId, DateTime start, DateTime end);
     }
 }

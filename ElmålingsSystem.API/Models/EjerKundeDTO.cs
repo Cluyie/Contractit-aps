@@ -4,8 +4,8 @@ namespace ElmålingsSystem.API.Models
 {
     public class EjerKundeDTO
     {
-        public int KundeId { get; set; }
-        public int CPRNr { get; set; }
+        public int Id { get; set; }
+        public int CprNr { get; set; }
         public string ForNavn { get; set; }
         public string EfterNavn { get; set; }
         public string VejNavn { get; set; }

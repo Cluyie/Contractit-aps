@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ElmålingsSystem.DAL.Entities
 {
@@ -9,12 +10,13 @@ namespace ElmålingsSystem.DAL.Entities
     {
         [Key]
         public int Id { get; set; }
-        public DateTime AflæsningDatoTid { get; set; }
+        public DateTime AflæsningDato { get; set; }
         public double Tællerstand { get; set; }
         public int ForbrugKWH { get; set; }
 
         //Foreign Key
-        public int MålerFK { get; set; }
+        [ForeignKey("Måler")]
+        public int MålerId { get; set; }
         public Måler Måler { get; set; }
     }
 }

@@ -34,12 +34,6 @@ namespace ElmålingsSystem.API.Controllers
         {
             var lejerKunder = await _service.GetAllLejerKunder();
 
-            var collection = new Collection<LejerKundeDTO>
-            {
-                Self = Link.ToCollection(nameof(GetAllLejerKunder)),
-                Value = lejerKunder.ToArray()
-            };
-
             return Ok(lejerKunder);
         }
 

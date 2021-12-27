@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using ElmålingsSystem.API.Models;
-using ElmålingsSystem.DAL.Models;
+using ElmålingsSystem.DAL;
+using ElmålingsSystem.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace ElmålingsSystem.API.Services
 {
-    public class DefaultLejerKundeService : ILejerKundeService
+    public class LejerKundeService : ILejerKundeService
     {
         private readonly MålingContext _context;
         private readonly IConfigurationProvider _mappingConfiguration;
 
-        public DefaultLejerKundeService(MålingContext context, IConfigurationProvider mappingConfiguration)
+        public LejerKundeService(MålingContext context, IConfigurationProvider mappingConfiguration)
         {
             _context = context;
             _mappingConfiguration = mappingConfiguration;
@@ -44,13 +45,13 @@ namespace ElmålingsSystem.API.Services
 
         public async Task<LejerKundeDTO> PostLejerKunde(int installationsId, [FromBody] LejerKundeDTO lejerKunde)
         {
-            var installation = await _context.Installationer.FirstOrDefaultAsync(i => i.InstallationsId == installationsId);
+            var installation = await _context.Installationer.FirstOrDefaultAsync(i => i.Id == installationsId);
             if (installation == null) return null;
 
             var mapper = _mappingConfiguration.CreateMapper();
 
             var nyLejerKunde = mapper.Map<LejerKunde>(lejerKunde);
-            nyLejerKunde.InstallionFK = installation.InstallationsId;
+            nyLejerKunde.InstallationId = installation.Id;
 
             _context.LejerKunder.Add(nyLejerKunde);
             await _context.SaveChangesAsync();
@@ -63,14 +64,14 @@ namespace ElmålingsSystem.API.Services
         public async Task<LejerKundeDTO> PutLejerKundeById(int lejerKundeId, [FromBody]LejerKundeDTO lejerKunde)
         {
             //var installation = await _context.Installationer.SingleOrDefaultAsync(k => k.InstallationsId == installationsId);
-            var installation = await _context.Installationer.FirstOrDefaultAsync(k => k.LejerKunde.KundeId.Equals(lejerKundeId));
+            var installation = await _context.Installationer.FirstOrDefaultAsync(k => k.LejerKunde.Id.Equals(lejerKundeId));
             if (installation == null) return null;
 
             var mapper = _mappingConfiguration.CreateMapper();
             var editedLejerKunde = mapper.Map<LejerKunde>(lejerKunde);
 
-            editedLejerKunde.InstallionFK = installation.InstallationsId;
-            editedLejerKunde.KundeId = lejerKundeId;
+            editedLejerKunde.InstallationId = installation.Id;
+            editedLejerKunde.Id = lejerKundeId;
 
             _context.Update(editedLejerKunde).State = EntityState.Modified;
             await _context.SaveChangesAsync();

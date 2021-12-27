@@ -5,8 +5,8 @@ namespace ElmålingsSystem.API.Models
 {
     public class MåleVærdierDTO
     {
-        public int MåleraflæsningId { get; set; }
-        public DateTime AflæsningDatoTid { get; set; }
+        public int Id { get; set; }
+        public DateTime AflæsningDato { get; set; }
         public double Tællerstand { get; set; }
         public int ForbrugKWH { get; set; }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ElmålingsSystem.DAL.Entities
@@ -12,16 +13,14 @@ namespace ElmålingsSystem.DAL.Entities
         public int CprNr { get; set; }
         public string ForNavn { get; set; }
         public string EfterNavn { get; set; }
-        public string VejNavn { get; set; }
-        public string HusNummer { get; set; }
-        public string Etage { get; set; }
-        public string Dør { get; set; }
-        public int PostNummer { get; set; }
-        public string ByNavn { get; set; }
-        public string KommuneNavn { get; set; }
 
         // foreign key
-        public int InstallionFK { get; set; }
+        [ForeignKey("EjerKunde")]
+        public int EjerkundeId { get; set; }
+        public EjerKunde EjerKunde { get; set; }
+
+        [ForeignKey("Installation")]
+        public int InstallationId { get; set; }
         public Installation Installation { get; set; }
     }
 }
