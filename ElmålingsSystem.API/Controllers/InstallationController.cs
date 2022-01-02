@@ -19,56 +19,50 @@ namespace ElmålingsSystem.API.Controllers
             _service = service;
         }
 
-        [HttpGet("{installationsId}", Name = nameof(GetInstallation))]
-        public async Task<ActionResult<InstallationLinked>> GetInstallation(int installationsId)
+        [HttpGet("{id}", Name = nameof(GetInstallation))]
+        public async Task<ActionResult<InstallationDTO>> GetInstallation(int id)
         {
-            var installation = await _service.GetInstallationById(installationsId);
+            var installation = await _service.GetInstallation(id);
 
             if (installation == null) return NotFound();
 
             return Ok(installation);
         }
 
-        [HttpGet("All/{ejerKundeCprNr}", Name = nameof(GetAllInstallationer))]
-        public async Task<ActionResult<IEnumerable<InstallationLinked>>> GetAllInstallationer(int ejerKundeCprNr)
+        [HttpGet("ejerkunde/{ejerKundeId}", Name = nameof(GetAllInstallationer))]
+        public async Task<ActionResult<IEnumerable<InstallationDTO>>> GetAllInstallationer(int ejerKundeId)
         {
-            var installationer = await _service.GetAllInstallationerFromKundeCprNr(ejerKundeCprNr);
+            var installationer = await _service.GetAllInstallationerFromEjerKunde(ejerKundeId);
 
             if (installationer == null) return NotFound();
-
-            var collection = new Collection<InstallationLinked>
-            {
-                Self = Link.ToCollection(nameof(GetAllInstallationer)),
-                Value = installationer.ToArray()
-            };
 
             return Ok(installationer);
         }
 
-        [HttpPost(Name = nameof(PostInstallation))]
-        public async Task<ActionResult<InstallationLinked>> PostInstallation(int ejerKundeCprNr, [FromBody] InstallationLinked installation)
+        [HttpPost("{ejerKundeId}", Name = nameof(PostInstallation))]
+        public async Task<ActionResult<InstallationDTO>> PostInstallation(int ejerKundeId, [FromBody] InstallationDTO installation)
         {
-            var nyInstallation = await _service.PostInstallation(ejerKundeCprNr, installation);
+            var nyInstallation = await _service.PostInstallation(ejerKundeId, installation);
 
             if (nyInstallation == null) return NotFound();
 
             return Ok(nyInstallation);
         }
 
-        [HttpPut("{installationsId}",Name = nameof(PutInstallation))]
-        public async Task<ActionResult<InstallationLinked>> PutInstallation(int installationsId, [FromBody]InstallationLinked installation)
+        [HttpPut("{id}",Name = nameof(PutInstallation))]
+        public async Task<ActionResult<InstallationDTO>> PutInstallation(int id, [FromBody]InstallationDTO installation)
         {
-            var editedInstallation = await _service.PutInstallationById(installationsId, installation);
+            var editedInstallation = await _service.PutInstallation(id, installation);
 
             if (editedInstallation == null) return NotFound();
 
             return Ok(editedInstallation);
         }
 
-        [HttpDelete("{installationsId}",Name = nameof(DeleteInstallation))]
-        public async Task<ActionResult<InstallationLinked>> DeleteInstallation(int installationsId)
+        [HttpDelete("{id}",Name = nameof(DeleteInstallation))]
+        public async Task<ActionResult<InstallationDTO>> DeleteInstallation(int id)
         {
-            var installation = await _service.DeleteInstallationById(installationsId);
+            var installation = await _service.DeleteInstallation(id);
 
             if (installation == false) return NotFound();
 

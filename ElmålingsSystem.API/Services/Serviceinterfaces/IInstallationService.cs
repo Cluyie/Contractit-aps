@@ -1,5 +1,4 @@
 ﻿using ElmålingsSystem.API.Models;
-using ElmålingsSystem.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,10 +9,10 @@ namespace ElmålingsSystem.API.Services
 {
     public interface IInstallationService
     {
-        Task<InstallationLinked> GetInstallationById(int installationsId);
-        Task<IEnumerable<InstallationLinked>> GetAllInstallationerFromKundeCprNr(int ejerKundeCprNr);
-        Task<InstallationLinked> PostInstallation(int ejerKundeCprNr, [FromBody] InstallationLinked installation);
-        Task<InstallationLinked> PutInstallationById(int installationsId, [FromBody] InstallationLinked installation);
-        Task<bool> DeleteInstallationById(int installationsId);
+        Task<InstallationDTO> GetInstallation(int id);
+        Task<IEnumerable<InstallationDTO>> GetAllInstallationerFromEjerKunde(int ejerKundeId);
+        Task<InstallationDTO> PostInstallation(int ejerKundeId, [FromBody] InstallationDTO installation);
+        Task<InstallationDTO> PutInstallation(int Id, [FromBody] InstallationDTO installation);
+        Task<bool> DeleteInstallation(int Id);
     }
 }

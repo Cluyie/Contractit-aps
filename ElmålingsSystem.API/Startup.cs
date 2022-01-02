@@ -1,23 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 using AutoMapper;
 using ElmålingsSystem.API.Infrastructure;
 using ElmålingsSystem.API.Services;
-using ElmålingsSystem.DAL.Models;
+using ElmålingsSystem.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace ElmålingsSystem.API
@@ -35,42 +28,20 @@ namespace ElmålingsSystem.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MålingContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ContractIt"),
-                x => x.MigrationsAssembly("ElmålingsSystem.DAL")));
+                options.UseInMemoryDatabase("ElMåling"));
 
-            services.AddScoped<IEjerKundeService, DefaultEjerKundeService>();
-            services.AddScoped<ILejerKundeService, DefaultLejerKundeService>();
-            services.AddScoped<IInstallationService, DefaultInstallationService>();
-            services.AddScoped<IMålerService, DefaultMålerService>();
-            services.AddScoped<IMåleVærdierService, DefaultMåleVærdierService>();
+            services.AddScoped<IEjerKundeService, EjerKundeService>();
+            services.AddScoped<ILejerKundeService, LejerKundeService>();
+            services.AddScoped<IInstallationService, InstallationService>();
+            services.AddScoped<IMålerService, MålerService>();
+            services.AddScoped<IMåleVærdierService, MåleVærdierService>();
             services.AddScoped<JsonSerializerOptions>();
-            services.AddAutoMapper(typeof(Startup)); //else, try (Startup)
-            services.AddControllers(options =>
-            {
-                options.Filters.Add<LinkRewritingFilter>();
-            });
+            services.AddAutoMapper(typeof(MappingProfile));
 
             //configure IApiVersionDescriptionProvider as a service
             services.AddApiVersioningAndExplorer();
 
-            #region configuration for API in swagger
-            ///<summary>
-            ///vi er gået fra at bruge "URL path segment"
-            ///til "Media type parameter"
-            /// </summary>
-
             services.AddSwaggerGeneration();
-
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1.0", new OpenApiInfo
-            //    {
-            //        Title = "ContractIt aps API",
-            //        Version = "v1.0",
-            //        Description = "OpenAPI for ContractIt aps's elmålings system"
-            //    });
-            //});
-            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,8 +70,6 @@ namespace ElmålingsSystem.API
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
